@@ -27,16 +27,16 @@ pipeline {
         stage("Update k8s manifest Repo") {
             steps {
                 echo "pushing updated manifest to repository"
-                withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'git-token', usernameVariable: 'username')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh "sed -i 's+saurabhkr952/jenkins-custom-img:.*+saurabhkr952/jenkins-custom-img:$BUILD_NUMBER+g' kubernetes_manifests/temp-jenkins/templates/deployment.yaml"
                     sh 'git config --global user.email "saurabhkr952@gmail.com"'
                     sh 'git config --global user.name "saurabhkr952"'
                     sh "git add -A"
                     sh "git commit -m 'Updated image tag | Image Version=$BUILD_NUMBER'"
                     sh "git remote -v"
-                    sh "git push https://$git-token@github.com/Saurabhkr952/temp.git HEAD:main"
+                    sh "git push https://$password@github.com/Saurabhkr952/temp.git HEAD:main"
+                }
             }
-        }
         }
     }
 }
