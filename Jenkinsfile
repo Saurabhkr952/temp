@@ -9,14 +9,11 @@ pipeline {
             }
         }
         stage('Test') {
-                environment {
-                DOCKER_IMAGE = "saurabhkr952/jenkins-custom-img:${BUILD_NUMBER}"
-                REGISTRY_CREDENTIALS = credentials('docker-cred')
-        }
             steps {
-                def dockerImage = docker.image("${DOCKER_IMAGE}")
-                docker.withRegistry('https://index.docker.io/v1/', "docker-credentials") {
-                dockerImage.push()
+                echo 'deploying the application...'
+                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh "saurabhkr952/jenkins-custom-img:${BUILD_NUMBER}"
             }
         }
         }
