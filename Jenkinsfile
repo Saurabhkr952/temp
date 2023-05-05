@@ -20,7 +20,7 @@ pipeline {
         stage("checkout mainfest repo") {
             steps {
                 git credentialsId: 'github-credentials', 
-                url: 'https://github.com/Saurabhkr952/counter-demo-app-manifest-Helm.git',
+                url: 'https://github.com/Saurabhkr952/temp.git',
                 branch: 'main'
             }
         }
