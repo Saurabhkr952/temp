@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "docker build -t saurabhkr952/jenkins-custom-img:${BUILD_NUMBER} ."
+                sh "docker build -t saurabhkr952/jenkins-custom-img:BUILD_NUMBER ."
             }
         }
         stage('Test') {
@@ -13,7 +13,7 @@ pipeline {
                 echo 'deploying the application...'
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh "saurabhkr952/jenkins-custom-img:${BUILD_NUMBER}"
+                    sh "saurabhkr952/jenkins-custom-img:BUILD_NUMBER"
             }
         }
         }
