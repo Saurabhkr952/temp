@@ -8,7 +8,7 @@ pipeline {
                 sh "docker build -t saurabhkr952/jenkins-custom-img:$BUILD_NUMBER ."
             }
         }
-        stage('Test') {
+        stage('Push artifact to Dockerhub') {
             steps {
                 echo 'deploying the application...'
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
