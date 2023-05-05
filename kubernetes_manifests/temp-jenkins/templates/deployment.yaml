@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.appName }}-{{ .Values.env }}"
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      imagePullSecrets:
+      - name: regsecret
+      containers:
+      - name: {{ .Values.appName }}
+        image: saurabhkr952/dev-portfolio:131e1c1e81861ac86aad8e172a9238c635a47feb
+        imagePullPolicy: Always
