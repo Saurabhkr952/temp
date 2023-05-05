@@ -1,4 +1,4 @@
-appName: demo-counter-app
+appName: temp
 env: dev
 namespace: dev
 replicas: 2
