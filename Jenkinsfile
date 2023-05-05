@@ -13,7 +13,7 @@ pipeline {
                 echo 'deploying the application...'
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh "docker.io/saurabhkr952/jenkins-custom-img:$BUILD_NUMBER"
+                    sh "docker image push saurabhkr952/jenkins-custom-img:$BUILD_NUMBER"
             }
         }
         }
