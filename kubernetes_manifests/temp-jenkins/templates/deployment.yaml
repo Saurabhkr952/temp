@@ -19,5 +19,5 @@ spec:
       - name: regsecret
       containers:
       - name: {{ .Values.appName }}
-        image: saurabhkr952/jenkins-custom-img:21
+        image: saurabhkr952/jenkins-custom-img:24
         imagePullPolicy: Always
